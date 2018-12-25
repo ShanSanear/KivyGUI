@@ -3,7 +3,18 @@
     size_hint_y: None
     orientation: "horizontal"
     height: 30
-
+    Label:
+        text: "Skill name"
+    Label:
+        text: "Attribute"
+    Label:
+        text: "End mod"
+    Label:
+        text: "attr mod"
+    Label:
+        text: "rank"
+    Label:
+        text: "misc mod"
         
 <OptionsContainer@BoxLayout>:
     id: options_container
@@ -61,28 +72,15 @@
     SkillTextInput:
         id: skill_misc_mod
 
-<MainSkillContainer@GridLayout>:
-    cols: 6
-    row_default_height: 30
-    rows: 4
+<MainSkillContainer@BoxLayout>:
     main_skill_container: main_skill_container
     skill_name : skill_name
     skill_attribute : skill_attribute
     id: main_skill_container
     orientation: 'vertical'
     spacing: 5
-    Label:
-        text: "Skill name"
-    Label:
-        text: "Attribute"
-    Label:
-        text: "End mod"
-    Label:
-        text: "attr mod"
-    Label:
-        text: "rank"
-    Label:
-        text: "misc mod"
+    SkillsHeader:
+        id: skills_header
     BoxLayout:
         orientation: 'horizontal'
         TextInput:
