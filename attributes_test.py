@@ -22,6 +22,7 @@ class Test(BoxLayout):
 
     def __init__(self):
         super(Test, self).__init__()
+        self.rv_header.data = [{'value': 'VALUE', 'attr': 'ATTRIBUTE', 'attr_mod_val' : 'MOD'}]
         self.rv.data = [{'value': val, 'attr': attr} for (val, attr) in
                         zip(['14'] * 6, ('STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'))]
         self.add_mods_to_attributes()

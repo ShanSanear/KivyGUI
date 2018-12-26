@@ -1,6 +1,6 @@
 
 
-<SkillTextInput@TextInput>:
+<AttributeTextInput@TextInput>:
     id: skill_attribute_label
     readonly: True
     background_color: [0.5, 0.5, 0.5, 1]
@@ -11,6 +11,40 @@
     height: dp(30)
     halign: 'left'
     valign: 'center'
+<LabelInput@Label>:
+    id: skill_attribute_label
+    readonly: True
+    background_color: [0.5, 0.5, 0.5, 1]
+    font_size: '14sp'
+    text_size: self.size
+    text: "0"
+    size_hint: None, None
+    height: dp(30)
+    halign: 'left'
+    valign: 'center'
+<HeaderRow@BoxLayout>:
+    size_hint_y: None
+    size_hint_x: None
+    height: 30
+    #canvas.before:
+    #    Color:
+    #        rgba: 1, 1, 0.5, 1
+    #    Rectangle:
+    #        size: self.size
+    #        pos: self.pos
+    value: attr_val.text
+    attr: attr_name.text
+    attr_mod_val: attr_mod.text
+    LabelInput:
+        id: attr_name
+        text: root.attr
+    LabelInput:
+        id: attr_val
+        text: root.value
+        readonly: False
+    LabelInput:
+        id: attr_mod
+        text: root.attr_mod_val
 
 <Row@BoxLayout>:
     size_hint_y: None
@@ -25,17 +59,24 @@
     value: attr_val.text
     attr: attr_name.text
     attr_mod_val: attr_mod.text
-    SkillTextInput:
+    AttributeTextInput:
         id: attr_name
         text: root.attr
-    SkillTextInput:
+    AttributeTextInput:
         id: attr_val
         text: root.value
         readonly: False
-    SkillTextInput:
+    AttributeTextInput:
         id: attr_mod
         text: root.attr_mod_val
 
+<DefaultRecycleBoxLayout@RecycleBoxLayout>:
+    default_size: None, dp(30)
+    default_size_hint: 1, None
+    size_hint_y: None
+    height: self.minimum_height
+    orientation: 'vertical'
+    spacing: dp(2)
 <Test>:
     id: test_box_layout
     canvas:
@@ -44,19 +85,23 @@
         Rectangle:
             size: self.size
             pos: self.pos
+    spacing: 0
     rv: rv
+    rv_header: rv_header
     orientation: 'vertical'
+    RecycleView:
+        size_hint_y: None
+        height: dp(30)
+        id: rv_header
+        viewclass: 'HeaderRow'
+        DefaultRecycleBoxLayout:
+            id: rv_header_box_layout
     RecycleView:
         id: rv
         viewclass: 'Row'
-        RecycleBoxLayout:
+        DefaultRecycleBoxLayout:
             id: rv_box_layout
-            default_size: None, dp(30)
-            default_size_hint: 1, None
-            size_hint_y: None
-            height: self.minimum_height
-            orientation: 'vertical'
-            spacing: dp(2)
+
     BoxLayout:
         Button:
             on_press: root.update_rv_data(rv_box_layout)
