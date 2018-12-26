@@ -34,7 +34,7 @@ class OptionsContainer(BoxLayout):
         main_skill_container.add_widget(SingleSkillLayout(tmp, skill_name, skill_attribute), 2)
         self.properties_count += 1
 
-    def callback_info(self, *args, **kwargs):
+    def callback_info(self):
         print("IDs:", self.ids)
         print("Dict:", self.__dict__)
         print("Children:", self.children)
@@ -71,5 +71,3 @@ class SkillsApp(App):
 
 if __name__ == '__main__':
     SkillsApp().run()
-    Config.set('kivy', 'keyboard_mode', 'system')
-    Config.write()

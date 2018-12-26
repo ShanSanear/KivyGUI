@@ -1,9 +1,5 @@
-from random import sample
-from string import ascii_lowercase
-
 from kivy.app import App
 from kivy.clock import Clock
-from kivy.lang import Builder
 from kivy.properties import StringProperty
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.recycleview import RecycleView
@@ -18,11 +14,12 @@ class Row(BoxLayout):
     attr = StringProperty()
     attr_mod_val = StringProperty()
 
+
 class Test(BoxLayout):
 
     def __init__(self):
         super(Test, self).__init__()
-        self.rv_header.data = [{'value': 'VALUE', 'attr': 'ATTRIBUTE', 'attr_mod_val' : 'MOD'}]
+        self.rv_header.data = [{'value': 'VALUE', 'attr': 'ATTRIBUTE', 'attr_mod_val': 'MOD'}]
         self.rv.data = [{'value': val, 'attr': attr} for (val, attr) in
                         zip(['14'] * 6, ('STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'))]
         self.add_mods_to_attributes()
@@ -50,7 +47,6 @@ class Test(BoxLayout):
         print(self.ids.rv_box_layout.children)
         attr_updated_data = []
         for attribute_data in reversed(rv_box_layout.children):
-
             print(attribute_data.attr)
             print(attribute_data.value)
             attr_updated_data.append([attribute_data.value, attribute_data.attr])
