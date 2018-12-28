@@ -1,25 +1,5 @@
 #:include templates.kv
 
-<OptionsContainer@BoxLayout>:
-#    id: options_container
-#
-#    BoxLayout:
-#        orientation: 'horizontal'
-#        Button:
-#            id: add_skill_button
-#            text: "Add new skill"
-#            text_size: self.size
-#            halign: 'center'
-#            valign: 'middle'
-#            on_press: options_container.add_new_skill(app.root.ids.skill_name.text, app.root.ids.skill_attribute.text, app.root.ids.obj)
-#        Button:
-#            id: callback_info_button
-#            text: "Callback"
-#            text_size: self.size
-#            halign: 'center'
-#            valign: 'middle'
-#            on_press: options_container.callback_info()
-
 <SkillTextInput@TextInput+DefaultText>:
     id: skill_attribute_label
     readonly: True
