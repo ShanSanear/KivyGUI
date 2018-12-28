@@ -35,3 +35,27 @@
 
 <DefaultButton@Button+DefaultText>:
     text: "Dummy text"
+
+<DefaultTextInput@TextInput+DefaultText>:
+    readonly: False
+
+
+
+<TextInputWithLabelAbove@BoxLayout>:
+    orientation: "vertical"
+    label_above_text: ""
+    text_input_text : text_input.text
+    LabelInput:
+        text: root.label_above_text
+    DefaultTextInput:
+        id: text_input
+        text: root.text_input_text
+
+<BetweenTextInputWithLabelAbove@BoxLayout>:
+    orientation: "vertical"
+    text_label : ""
+    LabelInput:
+        text: ""
+    LabelInput:
+        id: text_input
+        text: root.text_label
