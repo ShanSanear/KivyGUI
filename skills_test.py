@@ -6,65 +6,49 @@ from kivy.config import Config
 from kivy.properties import ObjectProperty
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
+from kivy.uix.recycleview import RecycleView
 from kivy.uix.textinput import TextInput
 
 
-class MainSkillContainer(BoxLayout):
+class SkillsMainContainer(BoxLayout):
     def __init__(self):
-        skill_name = ObjectProperty(None)
-        main_skill_container = ObjectProperty(None)
-        skill_attribute = ObjectProperty(None)
-        super(MainSkillContainer, self).__init__()
+        super(SkillsMainContainer, self).__init__()
+        print(self.ids.skills_rv_header)
+        self.skills_rv_header.data = [
+            {'skill_name': "Skill name", 'skill_attribute': "Attr", 'skill_full_mod': "Full mod",
+             'skill_attribute_mod': "Attr mod", 'skill_rank': "Rank", 'skill_misc': "Misc",
+             'skill_button': "Add / Remove"}]
+        d = {'skill_name': "Dummy skill", 'skill_attribute': "STR", 'skill_full_mod': "+12",
+             'skill_attribute_mod': "+2", 'skill_rank': "+8", 'skill_misc': "+2", 'skill_remove_add_text': 'remove'}
+        d1 = dict(skill_name="", skill_attribute="", skill_full_mod="", skill_attribute_mod="",
+                  skill_rank="", skill_misc="", skill_remove_add_text="Add")
+        self.skills_rv.data = [d, d1]
 
-class SkillTextInput(TextInput):
-    pass
-
-
-class OptionsContainer(BoxLayout):
-
-    def __init__(self):
-        self.properties_count = 0
-        super(OptionsContainer, self).__init__()
-        self.f = Factory
-
-    def add_new_skill(self, skill_name, skill_attribute, main_skill_container):
-        print(skill_name)
-        print("Adding new skill")
-        tmp = 'property_' + str(self.properties_count)
-        main_skill_container.add_widget(SingleSkillLayout(tmp, skill_name, skill_attribute), 2)
-        self.properties_count += 1
-
-    def callback_info(self):
-        print("IDs:", self.ids)
-        print("Dict:", self.__dict__)
-        print("Children:", self.children)
-        for child in self.children:
-            if 'skill_attribute_label' in child.ids:
-                print(child.ids['skill_attribute_label'])
-            print(child.ids)
+    def add_or_remove_skill(self, single_skill_row):
+        print()
 
 
-class SingleSkillLayout(BoxLayout):
-    def __init__(self, element_id, skill_name, skill_attribute):
-        self.id = element_id
-        super(SingleSkillLayout, self).__init__()
-        skill_name_text_input = self.ids['skill_name_label']
-        skill_attribute_text_input = self.ids['skill_attribute_label']
-        skill_name_text_input.text = skill_name
-        skill_attribute_text_input.text = skill_attribute
+    def add_new_skill(self):
+        pass
 
-    def show_skill(self):
-        for child in self.children:
-            print(child, child.text)
+    def remove_skill(self, skill_to_remove):
+        pass
+
+
+class SkillsRecycleView(RecycleView):
+    skills_rv = ObjectProperty(None)
+
+
+class SingleSkillRow(BoxLayout):
+    def add_remove_skill_callback(self, root_reference):
+        print("Callback from button")
+        print(root_reference)
 
 
 class SkillsApp(App):
 
     def build(self):
-        Window.size = (800, 600)
-        root = MainSkillContainer()
-        root.orientation = 'vertical'
-        root.add_widget(OptionsContainer())
+        root = SkillsMainContainer()
         print(root)
         return root
 

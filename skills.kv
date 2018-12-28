@@ -1,93 +1,123 @@
 #:include templates.kv
 
-<SkillsHeader@BoxLayout>:
-    size_hint_x: root.size_hint_x
-    size_hint_y: None
-    orientation: "horizontal"
-    height: 30
-    Label:
-        text: "Skill name"
-    Label:
-        text: "Attribute"
-    Label:
-        text: "End mod"
-    Label:
-        text: "attr mod"
-    Label:
-        text: "rank"
-    Label:
-        text: "misc mod"
-        
 <OptionsContainer@BoxLayout>:
-    id: options_container
+#    id: options_container
+#
+#    BoxLayout:
+#        orientation: 'horizontal'
+#        Button:
+#            id: add_skill_button
+#            text: "Add new skill"
+#            text_size: self.size
+#            halign: 'center'
+#            valign: 'middle'
+#            on_press: options_container.add_new_skill(app.root.ids.skill_name.text, app.root.ids.skill_attribute.text, app.root.ids.obj)
+#        Button:
+#            id: callback_info_button
+#            text: "Callback"
+#            text_size: self.size
+#            halign: 'center'
+#            valign: 'middle'
+#            on_press: options_container.callback_info()
 
-    BoxLayout:
-        orientation: 'horizontal'
-        Button:
-            id: add_skill_button
-            text: "Add new skill"
-            text_size: self.size
-            halign: 'center'
-            valign: 'middle'
-            on_press: options_container.add_new_skill(app.root.ids.skill_name.text, app.root.ids.skill_attribute.text, app.root.ids.obj)
-        Button:
-            id: callback_info_button
-            text: "Callback"
-            text_size: self.size
-            halign: 'center'
-            valign: 'middle'
-            on_press: options_container.callback_info()
-
-<SkillTextInput@TextInput>:
+<SkillTextInput@TextInput+DefaultText>:
     id: skill_attribute_label
     readonly: True
-    background_color: [0.5, 0.5, 0.5, 1]
-    font_size: 14
-    text_size: self.size
-    text: "0"
-    size_hint: 0.15, None
-    height: 30
-    halign: 'left'
-    valign: 'center'
 
-<SingleSkillLayout@BoxLayout>:
+<SkillsHeaderRow@DefaultRow>:
+    skill_name: ""
+    skill_attribute: ""
+    skill_full_mod: ""
+    skill_attribute_mod: ""
+    skill_rank: ""
+    skill_misc: ""
+    skill_button: ""
     orientation: 'horizontal'
     size_hint: 1, None
     height: 30
     spacing: 10
-    Label:
-        id: skill_name_label
-        text_size: self.size
-        text: "LabelText"
-        size_hint: 0.25, None
-        halign: 'right'
-        valign: 'center'
-        height: root.height
-    SkillTextInput:
-        id: skill_attribute_label
-    SkillTextInput:
-        id: skill_end_value
-    SkillTextInput:
-        id: skill_attribute_mod
-    SkillTextInput:
-        id: skill_rank
-    SkillTextInput:
-        id: skill_misc_mod
+    LabelInput:
+        text: root.skill_name
+        width: dp(100)
+    LabelInput:
+        text: root.skill_attribute
+    LabelInput:
+        text: root.skill_full_mod
+    LabelInput:
+        text: root.skill_attribute_mod
+    LabelInput:
+        text: root.skill_rank
+    LabelInput:
+        text: root.skill_misc
+    LabelInput:
+        text: root.skill_button
 
-<MainSkillContainer@BoxLayout>:
-    main_skill_container: main_skill_container
-    skill_name : skill_name
-    skill_attribute : skill_attribute
+
+<SingleSkillRow@DefaultRow>:
+    skill_name: skill_name_label.text
+    skill_attribute: skill_attribute_input.text
+    skill_full_mod: skill_full_mod_input.text
+    skill_attribute_mod: skill_attribute_mod_input.text
+    skill_rank: skill_rank_input.text
+    skill_misc: skill_misc_input.text
+    skill_remove_add_text: skill_remove_add_button.text
+    id: root.skill_name
+    orientation: 'horizontal'
+    size_hint: 1, None
+    height: 30
+    spacing: 10
+    LabelInput:
+        id: skill_name_label
+        text: root.skill_name
+        width: dp(100)
+    SkillTextInput:
+        id: skill_attribute_input
+        text: root.skill_attribute
+    SkillTextInput:
+        id: skill_full_mod_input
+        text: root.skill_full_mod
+    SkillTextInput:
+        id: skill_attribute_mod_input
+        text: root.skill_attribute_mod
+    SkillTextInput:
+        id: skill_rank_input
+        text: root.skill_rank
+    SkillTextInput:
+        id: skill_misc_input
+        text: root.skill_misc
+    DefaultButton:
+        id: skill_remove_add_button
+        text: root.skill_remove_add_text
+        halign: "center"
+        on_press: root.parent.parent.parent.add_or_remove_skill(root)
+
+
+<SkillsRecycleView@RecycleView>:
+
+<SkillsHeaderRecycleView@RecycleView>:
+
+<SkillsMainContainer@BoxLayout>:
     id: main_skill_container
+    skills_rv: skills_rv
+    skills_rv_header: skills_rv_header
+    canvas:
+        Color:
+            rgba: 0.3, 0.3, 0.3, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
     orientation: 'vertical'
     spacing: 5
-    SkillsHeader:
-        id: skills_header
-    BoxLayout:
-        orientation: 'horizontal'
-        TextInput:
-            id: skill_name
-            text: "Dummy skill name"
-        TextInput:
-            id: skill_attribute
-            text: "STR"
+    RecycleView:
+        size_hint_y: None
+        height: dp(30)
+        id: skills_rv_header
+        viewclass: 'SkillsHeaderRow'
+        DefaultRecycleBoxLayout:
+            id: skills_rv_header_box_layout
+    SkillsRecycleView:
+        spacing: dp(4)
+        id: skills_rv
+        viewclass: 'SingleSkillRow'
+        DefaultRecycleBoxLayout:
+            id: skills_rv_box_layout
