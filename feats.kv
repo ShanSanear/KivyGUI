@@ -1,0 +1,73 @@
+#:include templates.kv
+
+
+<FeatsHeaderRow@DefaultRow>:
+    feat_name : ""
+    add_remove_button_text: ""
+    description_text: ""
+    spacing: dp(10)
+    LabelInput:
+        text: root.feat_name
+        width: dp(100)
+    LabelInput:
+        text: root.description_text
+        width: dp(50)
+        halign: "center"
+
+    LabelInput:
+        text: root.add_remove_button_text
+        width: dp(100)
+
+
+
+<SingleFeatRow@DefaultRow>:
+    feat_name: feat_name_input.text
+    feat_add_remove_text: feat_add_remove_button.text
+    description_text: description_button.text
+    spacing: dp(10)
+    DefaultTextInput:
+        id: feat_name_input
+        text: root.feat_name
+        width: dp(100)
+    DefaultButton:
+        id: description_button
+        text: root.description_text
+        width: dp(50)
+        halign: "center"
+    DefaultButton:
+        id: feat_add_remove_button
+        text: root.feat_add_remove_text
+        width: dp(100)
+        halign: "center"
+        on_press: root.parent.parent.add_or_remove_feat(root)
+
+<FeatsRecycleView>:
+
+<FeatsHeaderRecycleView>:
+
+
+<FeatsMainContainer>:
+    id: feats_main_container
+    feats_rv_header : feats_rv_header
+    feats_rv : feats_rv
+    canvas:
+        Color:
+            rgba: 0.3, 0.3, 0.3, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    orientation: 'vertical'
+    spacing: 5
+    RecycleView:
+        size_hint_y: None
+        height: dp(30)
+        id: feats_rv_header
+        viewclass: 'FeatsHeaderRow'
+        DefaultRecycleBoxLayout:
+            id: feats_rv_header_box_layout
+    FeatsRecycleView:
+        spacing: dp(4)
+        id: feats_rv
+        viewclass: 'SingleFeatRow'
+        DefaultRecycleBoxLayout:
+            id: feats_rv_box_layout
