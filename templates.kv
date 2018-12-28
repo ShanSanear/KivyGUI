@@ -39,9 +39,24 @@
 <DefaultTextInput@TextInput+DefaultText>:
     readonly: False
 
+<ColorIt@Widget>:
+    canvas.before:
+        Color:
+            rgba: 0.22, 0.22, 0.5, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+<ColorIt2@Widget>:
+    canvas.before:
+        Color:
+            rgba: 0.22, 0.22, 0.22, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
 
 
-<TextInputWithLabelAbove@BoxLayout>:
+<TextInputWithLabelAbove@BoxLayout+ColorIt>:
     orientation: "vertical"
     label_above_text: ""
     text_input_text : text_input.text
@@ -51,11 +66,9 @@
         id: text_input
         text: root.text_input_text
 
-<BetweenTextInputWithLabelAbove@BoxLayout>:
+<BetweenTextInputWithLabelAbove@BoxLayout+ColorIt2>:
     orientation: "vertical"
     text_label : ""
-    LabelInput:
-        text: ""
     LabelInput:
         id: text_input
         text: root.text_label
