@@ -4,32 +4,27 @@
     id: skill_attribute_label
     readonly: True
     
-
-<LabelInput@Label+DefaultText>:
-    id: skill_attribute_label
-    readonly: True
-    halign: 'center'
-
-<HeaderRow@DefaultRow>:
-    value: attr_val.text
-    attr: attr_name.text
-    attr_mod_val: attr_mod.text
+<AttributesHeaderRow@DefaultRow>:
+    attr_value: attr_value_header.text
+    attr_name: attr_name_header.text
+    attr_mod: attr_mod_header.text
     LabelInput:
-        id: attr_name
-        text: root.attr
+        id: attr_name_header
+        text: root.attr_name
         halign: 'right'
         width: dp(100)
     LabelInput:
-        id: attr_val
-        text: root.value
+        id: attr_value_header
+        text: root.attr_value
     LabelInput:
-        id: attr_mod
-        text: root.attr_mod_val
+        id: attr_mod_header
+        text: root.attr_mod
 
-<Row@DefaultRow>:
+<SingleAttributeRow@DefaultRow>:
     value: attr_val.text
     attr: attr_name.text
     attr_mod_val: attr_mod.text
+    id: attr
     LabelInput:
         id: attr_name
         text: root.attr
@@ -42,9 +37,10 @@
     AttributeTextInput:
         id: attr_mod
         text: root.attr_mod_val
+<AttributesRecycleView@RecycleView>:
 
-<Test>:
-    id: test_box_layout
+<AttributesMainContainer>:
+    id: attributes_main_container
     canvas:
         Color:
             rgba: 0.3, 0.3, 0.3, 1
@@ -52,20 +48,20 @@
             size: self.size
             pos: self.pos
     spacing: 0
-    rv: rv
-    rv_header: rv_header
+    attributes_rv: attributes_rv
+    attributes_rv_header: attributes_rv_header
     orientation: 'vertical'
     RecycleView:
         size_hint_y: None
         height: dp(30)
-        id: rv_header
-        viewclass: 'HeaderRow'
+        id: attributes_rv_header
+        viewclass: 'AttributesHeaderRow'
         DefaultRecycleBoxLayout:
-            id: rv_header_box_layout
-    RecycleView:
+            id: attributes_rv_header_box_layout
+    AttributesRecycleView:
         spacing: dp(4)
-        id: rv
-        viewclass: 'Row'
+        id: attributes_rv
+        viewclass: 'SingleAttributeRow'
         DefaultRecycleBoxLayout:
             id: rv_box_layout
 
