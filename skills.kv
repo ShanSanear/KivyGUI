@@ -61,15 +61,15 @@
     skill_rank: skill_rank_input.text
     skill_misc: skill_misc_input.text
     skill_remove_add_text: skill_remove_add_button.text
-    id: root.skill_name
     orientation: 'horizontal'
     size_hint: 1, None
     height: 30
     spacing: 10
-    LabelInput:
+    SkillTextInput:
         id: skill_name_label
         text: root.skill_name
         width: dp(100)
+        readonly: False
     SkillTextInput:
         id: skill_attribute_input
         text: root.skill_attribute
@@ -89,17 +89,18 @@
         id: skill_remove_add_button
         text: root.skill_remove_add_text
         halign: "center"
-        on_press: root.parent.parent.parent.add_or_remove_skill(root)
+        on_press: root.parent.parent.add_or_remove_skill(root)
 
 
-<SkillsRecycleView@RecycleView>:
+<SkillsRecycleView>:
 
-<SkillsHeaderRecycleView@RecycleView>:
+<SkillsHeaderRecycleView>:
 
-<SkillsMainContainer@BoxLayout>:
+<SkillsMainContainer>:
     id: main_skill_container
     skills_rv: skills_rv
     skills_rv_header: skills_rv_header
+    skills_rv_box_layout: skills_rv_box_layout
     canvas:
         Color:
             rgba: 0.3, 0.3, 0.3, 1
