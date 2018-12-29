@@ -1,3 +1,4 @@
+from kivy.uix.popup import Popup
 from kivy.uix.recycleview import RecycleView
 
 
@@ -40,3 +41,7 @@ class BaseRecycleView(RecycleView):
     def get_highest_id(self):
         ids = [int(element['id'][self.element_string_len + 1:]) for element in self.data]
         return max(ids)
+
+
+class PopupWithText(Popup):
+    pass

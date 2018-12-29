@@ -72,3 +72,30 @@
     LabelInput:
         id: text_input
         text: root.text_label
+<MultilineLabel@ScrollView>:
+    label_text: ""
+    Label:
+        size_hint_y: None
+        text_size: (self.width, None)
+        text: root.label_text
+        height: self.texture_size[1]
+
+<PopupContent@BoxLayout>:
+    id: content
+    orientation: "vertical"
+    content_text: "TEST TEXT"
+    MultilineLabel:
+        id: content_label
+        label_text: root.content_text
+    Button:
+        text: "Close"
+        on_press: root.parent.parent.parent.dismiss()
+
+<PopupWithText>:
+    size_hint: None, None
+    width: 200
+    height: 400
+    label_text: "TEST"
+    PopupContent:
+
+

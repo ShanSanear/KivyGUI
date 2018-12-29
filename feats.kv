@@ -23,7 +23,7 @@
 <SingleFeatRow@DefaultRow>:
     feat_name: feat_name_input.text
     button_text: feat_add_remove_button.text
-    description_text: description_button.text
+    description_text: ""
     spacing: dp(10)
     DefaultTextInput:
         id: feat_name_input
@@ -31,7 +31,7 @@
         width: dp(100)
     DefaultButton:
         id: description_button
-        text: root.description_text
+        text: "DESC"
         width: dp(50)
         halign: "center"
         on_press: root.parent.parent.show_description(root)
@@ -45,6 +45,8 @@
 <FeatsRecycleView>:
 
 <FeatsHeaderRecycleView>:
+
+<FeatsPopup>:
 
 
 <FeatsMainContainer>:
