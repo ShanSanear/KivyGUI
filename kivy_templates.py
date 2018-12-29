@@ -2,8 +2,8 @@ from kivy.uix.recycleview import RecycleView
 
 
 class BaseRecycleView(RecycleView):
-    def __init__(self, element_string, row_data):
-        super(BaseRecycleView, self).__init__()
+    def __init__(self, element_string, row_data, **kwargs):
+        super(BaseRecycleView, self).__init__(**kwargs)
         self.element_string = element_string
         self.element_string_len = len(self.element_string)
         self.row_data = row_data
@@ -18,7 +18,8 @@ class BaseRecycleView(RecycleView):
 
     def add_new_element(self):
         highest_id = self.get_highest_id()
-        new_element_dummy = {'id': f'{self.element_string}_{highest_id + 1}'}.update(self.row_data)
+        new_element_dummy = {'id': f'{self.element_string}_{highest_id + 1}'}
+        new_element_dummy.update(self.row_data)
         self.data.insert(-1, new_element_dummy)
 
     def remove_element(self, element_id):
@@ -31,6 +32,11 @@ class BaseRecycleView(RecycleView):
         else:
             print("Something went wrong")
 
+    def get_element_with_id(self, element_id):
+        for idx, element in enumerate(self.data):
+            if element['id'] == element_id:
+                return element
+
     def get_highest_id(self):
-        ids = [int(element['id'][self.element_string_len + 1]) for element in self.data]
+        ids = [int(element['id'][self.element_string_len + 1:]) for element in self.data]
         return max(ids)
