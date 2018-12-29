@@ -22,7 +22,7 @@
 
 <SingleFeatRow@DefaultRow>:
     feat_name: feat_name_input.text
-    feat_add_remove_text: feat_add_remove_button.text
+    button_text: feat_add_remove_button.text
     description_text: description_button.text
     spacing: dp(10)
     DefaultTextInput:
@@ -36,7 +36,7 @@
         halign: "center"
     DefaultButton:
         id: feat_add_remove_button
-        text: root.feat_add_remove_text
+        text: root.button_text
         width: dp(100)
         halign: "center"
         on_press: root.parent.parent.add_or_remove_feat(root)
